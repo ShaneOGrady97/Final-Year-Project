@@ -30,7 +30,8 @@ import NumberFormat from 'react-number-format';
 const styles = theme => ({
     main: {
         width: 'auto',
-        display: 'block', 
+        display: 'block',
+        alignItems: 'center', 
 
         [theme.breakpoints.down('xs')]: {
             marginLeft: theme.spacing.unit * 1,
@@ -41,6 +42,12 @@ const styles = theme => ({
             marginLeft: theme.spacing.unit * 5,
             marginRight: theme.spacing.unit * 5,
         },
+
+
+
+        [theme.breakpoints.up('xl')]: {
+            marginLeft: theme.spacing.unit * 32,
+        },
     },
     paper: {
         marginTop: theme.spacing.unit * 5,
@@ -49,10 +56,13 @@ const styles = theme => ({
          padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px`,
         width: "100%",
         overflowX: 'auto',
+        [theme.breakpoints.up('xl')]: {
+            maxWidth: 1400,
+          },
     },
     table: {
          overflowX: 'auto',
-		 marginLeft: theme.spacing.unit,
+         marginLeft: theme.spacing.unit,
     },
     button: {
          marginTop: 20, 
@@ -193,7 +203,7 @@ class Home extends Component {
                     this.setState({ data: data.map(x => ({ ...x, starIcon: false })), loading: false, chartData });
                   }
 
-                  
+                  console.log(this.state.data.filter(z => z.starIcon === true))
                
             })
     }

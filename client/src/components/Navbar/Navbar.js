@@ -48,11 +48,17 @@ const styles = theme => ({
 
     grow: {
         flexGrow: 0.53,
+        [theme.breakpoints.up('xl')]: {
+            flexGrow: 0.52,
+        },
+    },
+    margin1: {
+        marginLeft: 5,
     },
     original: {
         [theme.breakpoints.down('xs')]: {
             display: 'none'
-        },
+        }
     },
     spanColor: {
         color: themeMui.palette.primary.orange,
@@ -102,6 +108,10 @@ const styles = theme => ({
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing.unit * 3,
             width: 400,
+        },
+        [theme.breakpoints.up('xl')]: {
+            marginLeft: theme.spacing.unit * 3,
+            width: 650,
         },
     },
     searchIcon: {
@@ -374,7 +384,7 @@ class Navbar extends React.Component {
                                 Cointrack
                             </Typography>
                             
-                            <div style={{marginLeft: 5}}></div>
+                            <div className={classes.margin1} ></div>
 
                              <div className={classes.search}>
                                 <div className={classes.searchIcon}>
