@@ -16,15 +16,12 @@ import Paper from "@material-ui/core/Paper";
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
-
 import theme2 from '../../Styles/theme.js';
-
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import List from '@material-ui/core/List';
