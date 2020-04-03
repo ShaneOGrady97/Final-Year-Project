@@ -69,6 +69,8 @@ router.post("/register", (req, res) => {
           let transporter = nodemailer.createTransport({
             service: 'gmail',
             host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
             auth: {
                 user: 'merntest1997@gmail.com',
                 pass: 'merntest1997!'
