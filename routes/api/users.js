@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 
 const nodemailer = require('nodemailer');
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -66,15 +68,32 @@ router.post("/register", (req, res) => {
           });
           
           // After user is created we will send a verification email to that user 
+
+          const oauth2Client = new OAuth2(
+            "938817720546-ufrnqn1ps3gg7qjula80utdhiuk7bjr6.apps.googleusercontent.com", // ClientID
+            "XiRkFddCkOOszREpLthRq0Rp", // Client Secret
+            "https://developers.google.com/oauthplayground" 
+           );
+    
+           oauth2Client.setCredentials({
+            refresh_token: "1//04D9fLX5KeBlvCgYIARAAGAQSNwF-L9Ir21kOIXdF2C0U8XM6cc3wwZbTyn4C8Cy_KjdieMBCBZlj75DMS60_o-2zvR-wpoOW8NM"
+           });
+          
+           const accessToken = oauth2Client.getAccessToken();
+
           let transporter = nodemailer.createTransport({
             service: 'gmail',
-            host: 'smtp.gmail.com',
             port: 465,
             secure: true,
+            host: 'smtp.gmail.com',
             auth: {
-                user: 'merntest1997@gmail.com',
-                pass: 'merntest1997!'
-            },
+              type: 'OAuth2',
+              user: 'merntest1997@gmail.com',
+              clientId: '938817720546-ufrnqn1ps3gg7qjula80utdhiuk7bjr6.apps.googleusercontent.com',
+              clientSecret: 'XiRkFddCkOOszREpLthRq0Rp',
+              refreshToken: '1//04g0o8OFlzE_7CgYIARAAGAQSNwF-L9Irp5VWhjMyRl4Lau02LQrmm8yXVGfwonRKOuqrtX2hfOser8iddpQtbskkIg4fppSa-rc',
+              accessToken: accessToken
+          },
             tls: {
                 rejectUnauthorized: false
             },
