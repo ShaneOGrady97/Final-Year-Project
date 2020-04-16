@@ -4,9 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 
-//const nodemailer = require('nodemailer');
-
-const nodeoutlook = require('nodejs-nodemailer-outlook');
+const nodemailer = require('nodemailer');
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
@@ -68,7 +66,7 @@ router.post("/register", (req, res) => {
           });
           
           // After user is created we will send a verification email to that user 
-          /*let transporter = nodemailer.createTransport({
+          let transporter = nodemailer.createTransport({
             service: 'gmail',
             host: 'smtp.gmail.com',
             port: 465,
@@ -80,7 +78,7 @@ router.post("/register", (req, res) => {
             tls: {
                 rejectUnauthorized: false
             },
-          });*/
+          });
     
           const payload = {
             id: newUser.id,
@@ -101,7 +99,7 @@ router.post("/register", (req, res) => {
               //const url = `http://localhost:5000/api/users/confirmation/${emailToken}`;
 
 
-              /*let mailOptions = {
+              let mailOptions = {
                 from: '"Cointrack" <cointrack-app.herokuapp.com>',
                 to: newUser.email,
                 subject: 'Confirm Email',
@@ -116,20 +114,7 @@ router.post("/register", (req, res) => {
                         success: true,
                     });
                 }
-              }); */
-
-				nodeoutlook.sendEmail({
-				auth: {
-					user: "cointrack-app@outlook.com",
-					pass: "merntest1997!"
-				},
-				from: 'Cointrack" <cointrack-app.herokuapp.com>',
-				to: 'newUser.email',
-				subject: 'Confirm email',
-				html: `Please click this link to confirm your email: <br/> <a href="${url}">${url}</a>`,
-				onError: (e) => console.log(e),
-				onSuccess: (i) => res.json({success:true,}),
-				});			  
+              });  
             }
           );
 
