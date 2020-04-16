@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const nodemailer = require('nodemailer');
+//const nodemailer = require('nodemailer')
+
+const nodeoutlook = require('nodejs-nodemailer-outlook');
 
 router.post("/contact", (req, res) => {
 
@@ -16,37 +18,19 @@ router.post("/contact", (req, res) => {
     <h4>Message:  </h4> 
     <p>${req.body.message}</p>
     `;
-
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        port: 465,
-        secure: true,
-        host: 'smtp.gmail.com',
-        auth: {
-            user: 'merntest1997@gmail.com',
-            pass: 'merntest1997!'
-        },
-        tls: {
-            rejectUnauthorized: false
-        },
-    });
-
-    let mailOptions = {
-        from: '"Nodemailer Contact" <cointrack-app.herokuapp.com>',
-        to: 'merntechinfo@gmail.com', //password same as merntest1997@gmail.com
-        subject: 'Sending Email using Node.js[nodemailer]',
-        html: output // html body
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            res.json({
-                success: true,
-            });
-        }
-    });  
+	
+	nodeoutlook.sendEmail({
+    auth: {
+        user: "cointrack-app@outlook.com",
+        pass: "merntest1997!"
+    },
+    from: 'cointrack-app@outlook.com',
+    to: 'merntechinfo@gmail.com', //password same as cointrack-app@outlook.com
+    subject: 'Sending Email using Node.js[nodemailer]',
+    html: output,
+    onError: (e) => console.log(e),
+    onSuccess: (i) => res.json({success:true,}),
+	});
 });
 
 
