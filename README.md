@@ -2,9 +2,23 @@
 
 > Crypotcurrency market data tracking application with authentication and discussion forum
 
+## Installation
+
+```bash
+
+# Install the client
+cd client
+npm install
+
+# Install the server
+cd ..
+npm install
+```
+
 ## Quick Start
 
 ```bash
+
 # Run the client & server with concurrently
 npm run dev
 
